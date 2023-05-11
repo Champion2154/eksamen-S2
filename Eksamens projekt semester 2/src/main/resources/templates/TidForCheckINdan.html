@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>intec.com/</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 150px;
+      font-size: 3em;
+    }
+  </style>
+  <script>
+    window.onload = function() {
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var minutes = currentTime.getMinutes();
+      var seconds = currentTime.getSeconds();
+      var clockMessage = "Current time: " + hours + ":" + minutes + ":" + seconds;
+      var greetingMessage = "Tak for at logge ind hos Intec";
+      document.getElementById("clock-message").textContent = clockMessage;
+      document.getElementById("greeting-message").textContent = greetingMessage;
+      setTimeout(function() {
+        window.location.href = "CheckINdan.html";
+      }, 15000); // 15 seconds in milliseconds
+    };
+  </script>
+</head>
+<body>
+<h1 id="greeting-message"></h1>
+<h2 id="clock-message"></h2>
+</body>
+</html>

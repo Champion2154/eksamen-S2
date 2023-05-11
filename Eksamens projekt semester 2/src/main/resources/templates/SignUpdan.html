@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>intec.com</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/x-icon" href="C:\Users\benja\Desktop\logo_stor-e1603991240532.jpg">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Add padding to containers */
+    .container {
+      width: 60%;
+      margin: 0 auto;
+      margin-top: 0px;
+      padding: 20px;
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Full-width input fields */
+    input[type=text], input[type=password], select {
+      width: 100%;
+      padding: 15px;
+      margin: 5px 0 22px 0;
+      display: inline-block;
+      border: 1px solid #999; /* Add a slightly darker border */
+      background: #f1f1f1;
+    }
+
+    /* Overwrite default styles of hr */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+
+    /* Set a style for the submit button */
+    .registerbtn {
+      background-color: #04AA6D;
+      color: white;
+      padding: 16px 20px;
+      margin: 8px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      opacity: 0.9;
+    }
+
+    .registerbtn:hover {
+      opacity: 1;
+    }
+
+    /* Add a blue text color to links */
+    a {
+      color: black;
+    }
+
+    /* Set a grey background color and center the text of the "sign in" section */
+    .signin {
+      background-color: #f1f1f1;
+      text-align: center;
+    }
+
+    label[for="shipping-company"] {
+      display: block;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<form action="/action_page.php">
+  <div class="container">
+    <h1>Register</h1>
+    <p>Udfyld disse felter, for at oprette en konto.</p>
+    <hr>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Email" name="email" id="email" required>
+
+    <label for="psw"><b>Kodeord</b></label>
+    <input type="password" placeholder="Kodeord" name="psw" id="psw" required>
+    <label for="psw-repeat"><b>Gentag Kodeord</b></label>
+    <input type="password" placeholder="Gentag Kodeord" name="psw-repeat" id="psw-repeat" required>
+
+
+
+
+    <label for="shipping-company">Vælg dit fragtfirma:</label>
+    <select id="shipping-company" name="shipping-company" required>
+      <option value="" selected disabled>Vælg dit fragtfirma</option>
+      <option value="DHL">DHL</option>
+      <option value="DSV">DSV</option>
+      <option value="GLS">GLS</option>
+    </select>
+    <hr>
+    <p>Når du oprette en konto siger du ja til vores <a href="#">Terms & Privacy</a>.</p>
+
+    <button type="submit" class="registerbtn" onclick="window.location.href='CheckINdan.html'">Register</button>
+
+    <p>Har du allerede en konto?  <a href="CheckINdan.html">Log ind</a>.</p>
+  </div>
+</form>
+<script>
+
+</script>
+</body>
+</html>

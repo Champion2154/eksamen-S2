@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/intec.css">
+  <link rel="icon" type="image/x-icon" href="C:\Users\benja\Desktop\logo_stor-e1603991240532.jpg">
+  <title>intec.com</title>
+</head>
+<style>
+
+  /* Style for the container */
+  .container {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 150px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  /* Style for the form */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Style for the headings */
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  /* Style for the input fields */
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Style for the submit button */
+  input[type=submit],
+  input[type=signup] {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  /* Style for the bottom container */
+  .bottom-container {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Style for the bottom container links */
+  .bottom-container a {
+    color: #666;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Style for the bottom container links on hover */
+  .bottom-container a:hover {
+    color: #555;
+    text-decoration: underline;
+  }
+
+  /* Style for the select shipping company */
+  .bottom-container select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+  /* Style for the login and signup buttons */
+  .button {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  /* .flag img {
+     max-height: 50px;
+     margin-right: 10px;
+   }
+   */
+
+
+</style>
+<body>
+<div class="container">
+  <div class="flags">
+    <a href="CheckINdan.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1200px-Flag_of_Denmark.svg.png" alt="Danish flag" height="30" width="60"></a>
+    <a href="CheckINeng.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png" alt="American flag" height="30" width="60"></a>
+
+  </div>
+
+  <form>
+    <div class="row">
+      <h2 style="text-align:center">Intec CheckIn</h2>
+      <div class="col">
+        <input type="text" name="First name" placeholder="First name" required>
+        <input type="text" name="Last name" placeholder="Last name" required>
+        <label for="shipping-company">Select your shipping company:</label>
+        <select id="shipping-company" name="shipping-company" required>
+          <option value="" selected disabled>Select Your Shipping Company</option>
+          <option value="DHL">DHL</option>
+          <option value="DSV">DSV</option>
+          <option value="GLS">GLS</option>
+        </select>
+        <input type="button" value="CheckIn" class="button" onclick="goToLogin()">
+        <input type="button" value="Signup" class="button" onclick="goToSignup()">
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<script>
+  function goToSignup() {
+    window.location.href = "SignUpeng.html";
+  }
+
+  function goToLogin() {
+    var firstName = document.getElementsByName("First name")[0].value;
+    var lastName = document.getElementsByName("Last name")[0].value;
+    var shippingCompany = document.getElementsByName("shipping-company")[0].value;
+
+    if (firstName !== "" && lastName !== "" && shippingCompany !== "") {
+      window.location.href = "tidForCheckINeng.html";
+    } else {
+      alert("Please fill in all required fields.");
+    }
+  }
+</script>
+</body>
+</html>
