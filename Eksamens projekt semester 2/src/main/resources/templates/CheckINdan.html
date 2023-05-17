@@ -203,13 +203,15 @@
     var lastName = document.getElementsByName("Efternavn")[0].value;
     var shippingCompany = document.getElementsByName("shipping-company")[0].value;
     var checkBox = document.getElementById("myCheck");
+    var fileUpload = document.getElementById("fileToUpload");
 
-    if (firstName !== "" && lastName !== "" && shippingCompany !== "" && checkBox.checked) {
+    if (firstName !== "" && lastName !== "" && shippingCompany !== "" && checkBox.checked && fileUpload.files.length > 0) {
       window.location.href = "tidForCheckINdan.html";
     } else {
-      alert("Udfyld alle nødvendige felter.");
+      alert("Udfyld alle nødvendige felter og upload et billede.");
     }
   }
+
 
   function openPopup() {
     var popup = document.getElementById("popup");

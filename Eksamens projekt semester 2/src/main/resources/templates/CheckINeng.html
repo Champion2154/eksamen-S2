@@ -201,9 +201,9 @@
     var lastName = document.getElementsByName("Last name")[0].value;
     var shippingCompany = document.getElementsByName("shipping-company")[0].value;
     var checkBox = document.getElementById("myCheck");
+    var fileUpload = document.getElementById("fileToUpload");
 
-    if (firstName !== "" && lastName !== "" && shippingCompany !== "" && checkBox.checked) {
-      window.location.href = "tidForCheckINeng.html";
+    if (firstName !== "" && lastName !== "" && shippingCompany !== "" && checkBox.checked && fileUpload.files.length > 0) {      window.location.href = "tidForCheckINeng.html";
     } else {
       alert("Please fill in all required fields.");
     }
