@@ -128,16 +128,6 @@
     margin-top: 10px;
     width: 100%;
   }
-  #popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
 
   /* .flag img {
      max-height: 50px;
@@ -166,18 +156,7 @@
           <option value="DHL">DHL</option>
           <option value="DSV">DSV</option>
           <option value="GLS">GLS</option>
-          <option value="Andet">Andet</option>
-
-
-          <input type="checkbox" id="myCheck">
-          <label for="myCheck">Jeg accepterer <a href="https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_da.htm#shortcut-10" target="_blank">GDPR-reglerne</a></label>
-
-
-
-
         </select>
-
-
         <center>
           <form action="upload.php" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">Vælg en fil:</label>
@@ -202,27 +181,13 @@
     var firstName = document.getElementsByName("Fornavn")[0].value;
     var lastName = document.getElementsByName("Efternavn")[0].value;
     var shippingCompany = document.getElementsByName("shipping-company")[0].value;
-    var checkBox = document.getElementById("myCheck");
-    var fileUpload = document.getElementById("fileToUpload");
 
-    if (firstName !== "" && lastName !== "" && shippingCompany !== "" && checkBox.checked && fileUpload.files.length > 0) {
+    if (firstName !== "" && lastName !== "" && shippingCompany !== "") {
       window.location.href = "tidForCheckINdan.html";
     } else {
-      alert("Udfyld alle nødvendige felter og upload et billede.");
+      alert("Udfyld alle nødvendige felter.");
     }
   }
-
-
-  function openPopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "block";
-  }
-
-  function closePopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "none";
-  }
-
 </script>
 </body>
 </html>

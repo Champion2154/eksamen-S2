@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="static/intec.css">
   <link rel="icon" type="image/x-icon" href="C:\Users\benja\Desktop\logo_stor-e1603991240532.jpg">
@@ -125,16 +124,6 @@
     margin-top: 10px;
     width: 100%;
   }
-  #popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 400px;
-    background-color: #fff;
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
 
   /* .flag img {
      max-height: 50px;
@@ -158,28 +147,19 @@
       <div class="col">
         <input type="text" name="First name" placeholder="First name" required>
         <input type="text" name="Last name" placeholder="Last name" required>
-        <label for="shipping-company">Select your company:</label>
+        <label for="shipping-company">Select your shipping company:</label>
         <select id="shipping-company" name="shipping-company" required>
-          <option value="" selected disabled>Select Your Company</option>
+          <option value="" selected disabled>Select Your Shipping Company</option>
           <option value="DHL">DHL</option>
           <option value="DSV">DSV</option>
           <option value="GLS">GLS</option>
-          <option value="Other">Other</option>
-
         </select>
 
-        <input type="checkbox" id="myCheck">
-        <label for="myCheck">I do Accept <a href="https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_da.htm#shortcut-10" target="_blank"> the GDPR-rules</a></label>
-
-
-
-
-        <center>
         <form action="upload.php" method="post" enctype="multipart/form-data">
           Select image to upload:
           <input type="file" name="fileToUpload" id="fileToUpload">
         </form>
-        </center>
+
 
 
 
@@ -200,10 +180,9 @@
     var firstName = document.getElementsByName("First name")[0].value;
     var lastName = document.getElementsByName("Last name")[0].value;
     var shippingCompany = document.getElementsByName("shipping-company")[0].value;
-    var checkBox = document.getElementById("myCheck");
-    var fileUpload = document.getElementById("fileToUpload");
 
-    if (firstName !== "" && lastName !== "" && shippingCompany !== "" && checkBox.checked && fileUpload.files.length > 0) {      window.location.href = "tidForCheckINeng.html";
+    if (firstName !== "" && lastName !== "" && shippingCompany !== "") {
+      window.location.href = "tidForCheckINeng.html";
     } else {
       alert("Please fill in all required fields.");
     }
@@ -216,19 +195,6 @@
     const fileName = fileInput.value.split('\\').pop();
     fileSelected.textContent = `You have chosen: ${fileName}`;
   });
-
-  function openPopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "block";
-  }
-
-  function closePopup() {
-    var popup = document.getElementById("popup");
-    popup.style.display = "none";
-  }
-
-
-
 </script>
 </body>
 </html>
