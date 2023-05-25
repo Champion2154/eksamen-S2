@@ -14,9 +14,7 @@ public class DBController {
     private Statement stmt1;
 
 
-    String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
-    String userName = "8xjzf9n7nex9x6d2kbhp";
-    String passWord = "pscale_pw_cXbtI5YQjqVcZKp80877SKiTpis7IzSAOiLyOBLJrfP";
+
 
 
     public void Sql() {
@@ -31,6 +29,9 @@ public class DBController {
         }
     }
 
+    public String registerCheckIn(String firstName, String lastName, String koerekort) {
+        return "aaasd";
+    }
 }
 /*
     public boolean validate(String UUsername, String PPassword) {
@@ -46,7 +47,7 @@ public class DBController {
             status = rs.next();
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTarce();
         }
         return status;
     }
@@ -65,33 +66,34 @@ public class DBController {
         }
     }
 
-    public Kvittering alleoplysninger() {
-        String sql = "select * from kvittering";
-        try {
-            Statement stmt = connection.createStatement();
-            Statement stmt1 = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Kvittering k = new Kvittering();
-                int nr = rs.getInt("kvitID");
-                k.setKvitID(nr);
-                k.setDato(rs.getString("dato"));
-                k.setTidspunkt(rs.getString("tidspunkt"));
-                k.setKfnavn(rs.getString("kfnavn"));
-                k.setKenavn(rs.getString("kenavn"));
-                k.setMnr(rs.getInt("mnr"));
-                String sql1 = "SELECT * from kvittering left join tidsbestilling on kvittering.kvitID=tidsbestilling.mnr where kvitID.mnr=" + nr;
-                ResultSet rs1 = stmt1.executeQuery(sql1);
-                //while (rs1.next()) {
-                //kvittering kvit = new kvittering();
-                //k..add(kvit);
-                //}
-            }
-            stmt.close();
-            stmt1.close();
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+
+public Kvittering alleoplysninger() {
+    String sql = "select * from kvittering";
+    try {
+        Statement stmt = connection.createStatement();
+        Statement stmt1 = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        while (rs.next()) {
+            Kvittering k = new Kvittering();
+            int nr = rs.getInt("kvitID");
+            k.setKvitID(nr);
+            k.setDato(rs.getString("dato"));
+            k.setTidspunkt(rs.getString("tidspunkt"));
+            k.setKfnavn(rs.getString("kfnavn"));
+            k.setKenavn(rs.getString("kenavn"));
+            k.setMnr(rs.getInt("mnr"));
+            String sql1 = "SELECT * from kvittering left join tidsbestilling on kvittering.kvitID=tidsbestilling.mnr where kvitID.mnr=" + nr;
+            ResultSet rs1 = stmt1.executeQuery(sql1);
+            //while (rs1.next()) {
+            //kvittering kvit = new kvittering();
+            //k..add(kvit);
+            //}
         }
-        return alleoplysninger();
+        stmt.close();
+        stmt1.close();
+    } catch (SQLException throwables) {
+        throwables.printStackTrace();
     }
+    return alleoplysninger();
+}
 }*/
