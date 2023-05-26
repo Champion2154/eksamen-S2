@@ -16,7 +16,9 @@ public class DBController {
 
 
 
-
+    String connectString = "jdbc:mysql://aws.connect.psdb.cloud/harmonika?sslMode=VERIFY_IDENTITY";
+    String userName = "zm7ge3oh0rzxikvrphqt";
+    String passWord = "pscale_pw_RrSB73rlMNMCTsEiUHQaES5AoatqYqLebYdrgoHUPRf";
     public void Sql() {
         try {
             Connection connection = DriverManager.getConnection(this.connectString, this.userName, this.passWord);

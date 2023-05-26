@@ -161,7 +161,7 @@
         <center>
           <form action="upload.php" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">Vælg en fil:</label>
-            <input type="file" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('fileLabel').innerHTML = this.files[0].name">
+            <input type="file" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('fileLabel').innerHTML = this.files[0].name" required>
           </form>
         </center>
 

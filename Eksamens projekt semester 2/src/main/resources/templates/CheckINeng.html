@@ -145,8 +145,9 @@
     <div class="row">
       <h2 style="text-align:center">Intec CheckIn</h2>
       <div class="col">
-        <input type="text" name="First name" placeholder="First name" required>
-        <input type="text" name="Last name" placeholder="Last name" required>
+        <input type="text" name="Firstname" placeholder="Firstname" required>
+        <input type="text" name="Lastname" placeholder="Lastname" required>
+        <input type="text" name="koerekort" placeholder="Driverlicense" required>
         <label for="shipping-company">Select your shipping company:</label>
         <select id="shipping-company" name="shipping-company" required>
           <option value="" selected disabled>Select Your Shipping Company</option>
@@ -155,15 +156,20 @@
           <option value="GLS">GLS</option>
         </select>
 
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-          Select image to upload:
-          <input type="file" name="fileToUpload" id="fileToUpload">
-        </form>
+        <center>
+          <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Select image to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('fileLabel').innerHTML = this.files[0].name" required>
+          </form>
+        </center>
 
 
 
 
-        <input type="button" value="CheckIn" class="button" onclick="goToLogin()">
+        <!input type="button" value="CheckIn" class="button" onclick="goToLogin()">
+        <input type="submit" value="CheckIn" class="button">
+
+
         <input type="button" value="Signup" class="button" onclick="goToSignup()">
       </div>
     </div>
