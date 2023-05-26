@@ -150,13 +150,15 @@
       <div class="col">
         <input type="text" name="Firstname" placeholder="Fornavn" required>
         <input type="text" name="Lastname" placeholder="Efternavn" required>
-        <input type="text" name="koerekort" placeholder="koerekort" required>
+        <input type="text" name="DriverLicenseNumber" placeholder="Kørekorts Nummmer" required>
         <label for="shipping-company">Vælg dit fragtfirma:</label>
         <select id="shipping-company" name="shipping-company" required>
           <option value="" selected disabled>Vælg dit fragtfirma</option>
           <option value="DHL">DHL</option>
           <option value="DSV">DSV</option>
           <option value="GLS">GLS</option>
+          <option value="Andet">Andet</option>
+
         </select>
         <center>
           <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -165,7 +167,7 @@
           </form>
         </center>
 
-        <!input type="submit" value="TjekInd" class="button" onclick="goToLogin()">
+        <!input type="submit" value=  "TjekInd" class="button" onclick="goToLogin()">
         <input type="submit" value="TjekInd" class="button">
 
         <input type="button" value="RegistereDigHer" class="button" onclick="goToSignup()">
@@ -181,11 +183,11 @@
   }
 
   function goToLogin() {
-    var firstName = document.getElementsByName("Fornavn")[0].value;
-    var lastName = document.getElementsByName("Efternavn")[0].value;
+    var Firstname = document.getElementsByName("Firstname")[0].value;
+    var Lastname = document.getElementsByName("Lastname")[0].value;
     var shippingCompany = document.getElementsByName("shipping-company")[0].value;
 
-    if (firstName !== "" && lastName !== "" && shippingCompany !== "") {
+    if (Firstname !== "" && Lastname !== "" && shippingCompany !== "") {
       window.location.href = "tidForCheckINdan.html";
     } else {
       alert("Udfyld alle nødvendige felter.");

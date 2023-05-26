@@ -2,10 +2,8 @@ package com.example.asdfasd;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class UIController {
@@ -18,12 +16,62 @@ public class UIController {
     }
 
 
-    @PostMapping("/TidForCheckInDan")
-    public String handleFormSubmit(@RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String koerekort, Model model) {
+   /* @PostMapping("/TidForCheckInDan")
+    public String handleFormSubmitDan(@RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String DriverLicenseNumber, Model model) {
         Usecase uc = new Usecase();
-        String ok = uc.checkin(Firstname, Lastname, koerekort);
+        String ok = uc.checkin(Firstname, Lastname, DriverLicenseNumber);
         model.addAttribute("okValue", ok);
         return "TidForCheckInDan";
     }
+
+
+    */
+    @PostMapping("/TimeForCheckInEng")
+    public String handleFormSubmitEng(@RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String DriverLicenseNumber, Model model) {
+        Usecase uc = new Usecase();
+        String ok = uc.checkin(Firstname, Lastname, DriverLicenseNumber);
+        model.addAttribute("okValue", ok);
+        return "TidForCheckInDan";
+    }
+
+    @PostMapping("/TidForCheckInDan")
+    public String handleFormSubmitDan(
+            @RequestParam String Firstname,
+            @RequestParam String Lastname,
+            @RequestParam String DriverLicenseNumber,
+            Model model,
+            RedirectAttributes redirectAttributes
+    ) {
+        Usecase uc = new Usecase();
+        String ok = uc.checkin(Firstname, Lastname, DriverLicenseNumber);
+        model.addAttribute("okValue", ok);
+
+        // Delay in milliseconds (e.g., 5 seconds = 5000 milliseconds)
+        int delay = 5000;
+
+        // Add the delay value to the redirect attributes
+        redirectAttributes.addFlashAttribute("delay", delay);
+
+        return "redirect:/TidForCheckInDan)";
+    }
+
+    @GetMapping("/CheckInDan")
+    public String frontPage() {
+        return "CheckInDan";
+    }
+
+    @GetMapping("/DelayedCheckInDan")
+    public String delayedFrontPage(
+            @ModelAttribute("delay") Integer delay,
+            Model model
+    ) {
+        // Check if the delay value is present
+        if (delay != null && delay > 0) {
+            model.addAttribute("delay", delay);
+        }
+
+        return "CheckInDan";
+    }
+
 
 }

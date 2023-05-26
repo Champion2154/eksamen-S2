@@ -141,29 +141,34 @@
 
   </div>
 
-  <form>
+  <form method="post" action="/TimeForCheckInEng">
     <div class="row">
       <h2 style="text-align:center">Intec CheckIn</h2>
       <div class="col">
-        <input type="text" name="First name" placeholder="First name" required>
-        <input type="text" name="Last name" placeholder="Last name" required>
+        <input type="text" name="Firstname" placeholder="First name" required>
+        <input type="text" name="Lastname" placeholder="Last name" required>
+        <input type="text" name="DriverLicenseNumber" placeholder="Driver license number" required>
+
         <label for="shipping-company">Select your shipping company:</label>
         <select id="shipping-company" name="shipping-company" required>
           <option value="" selected disabled>Select Your Shipping Company</option>
           <option value="DHL">DHL</option>
           <option value="DSV">DSV</option>
           <option value="GLS">GLS</option>
+          <option value="Other">Other</option>
+
         </select>
+        <center>
+          <form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Choose a file to upload:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('fileLabel').innerHTML = this.files[0].name">
+          </form>
+        </center>
 
-        <form action="upload.php" method="post" enctype="multipart/form-data">
-          Select image to upload:
-          <input type="file" name="fileToUpload" id="fileToUpload">
-        </form>
 
 
 
-
-        <input type="button" value="CheckIn" class="button" onclick="goToLogin()">
+        <input type="submit" value="Checkin" class="button">
         <input type="button" value="Signup" class="button" onclick="goToSignup()">
       </div>
     </div>
@@ -177,12 +182,12 @@
   }
 
   function goToLogin() {
-    var firstName = document.getElementsByName("First name")[0].value;
-    var lastName = document.getElementsByName("Last name")[0].value;
+    var Firstname = document.getElementsByName("First name")[0].value;
+    var Lastname = document.getElementsByName("Last name")[0].value;
     var shippingCompany = document.getElementsByName("shipping-company")[0].value;
 
-    if (firstName !== "" && lastName !== "" && shippingCompany !== "") {
-      window.location.href = "tidForCheckINeng.html";
+    if (Firstname !== "" && Lastname !== "" && shippingCompany !== "") {
+      window.location.href = "TimeForCheckInEng.html";
     } else {
       alert("Please fill in all required fields.");
     }

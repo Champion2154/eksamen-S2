@@ -3,12 +3,12 @@ package com.example.asdfasd;
 public class Usecase {
 
 
-    public String checkin(String FirstName, String LastName, String koerekort ) {
-        if (FirstName == null || LastName == null || koerekort == null){
+    public String checkin(String FirstName, String LastName, String DriverLicenseNumber ) {
+        if (FirstName == null || LastName == null || DriverLicenseNumber == null){
                 return "Alle felter var ikke udfyldte";
         } else {
             DBController dbc = new DBController();
-            String ok = dbc.registerCheckIn(FirstName, LastName, koerekort);
+            String ok = dbc.registerCheckIn(FirstName, LastName, DriverLicenseNumber);
         if (ok == null){
                 return "Der skete en fejl. Registeringen gik ikke igennem";
 
