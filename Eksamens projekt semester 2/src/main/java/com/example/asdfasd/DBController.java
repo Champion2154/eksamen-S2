@@ -14,9 +14,9 @@ public class DBController {
     private Statement stmt1;
 
 
-    String connectString = "jdbc:mysql://aws.connect.psdb.cloud/harmonika?sslMode=VERIFY_IDENTITY";
-    String userName = "vgrv5d7mb1r4o5318eoi";
-    String passWord = "pscale_pw_ik0V69HOzFr6F6QbY62JdOnQCOQxfzH5FFGQW2NN90U";
+    String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
+    String userName = "270jqa9clsmc5diso0av";
+    String passWord = "pscale_pw_BWF79D7Y6yMPxhSSlG3n1fbDUyvzyAU3h0djtx42bQ5";
 
 
     public void Sql() {
@@ -34,12 +34,6 @@ public class DBController {
     public String registerCheckIn(String firstName, String lastName, String DriverLicenseNumber) {
         return "aaasd";
     }
-
-
-
-
-
-
 
 
 }

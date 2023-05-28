@@ -14,6 +14,15 @@
       font-size: 3em;
     }
   </style>
+
+  <form method="post" action="/CheckInDan">
+    <div class="row">
+      <div class="col">
+                <input type="submit" value="Tilbage til Tjek ind" class="button">
+      </div>
+      </div>
+  </form>
+
   <p th:text="'Hello, ' + ${okValue} + '!'" />
   <script>
     window.onload = function() {
@@ -25,9 +34,11 @@
       var greetingMessage = "Tak for at logge ind hos Intec";
       document.getElementById("clock-message").textContent = clockMessage;
       document.getElementById("greeting-message").textContent = greetingMessage;
-      setTimeout(function() {
+      /*setTimeout(function() {
         window.location.href = "CheckINdan.html";
       }, 15000); // 15 seconds in milliseconds
+
+       */
     };
   </script>
 </head>

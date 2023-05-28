@@ -16,7 +16,7 @@ public class UIController {
     }
 
 
-   /* @PostMapping("/TidForCheckInDan")
+   @PostMapping("/TidForCheckInDan")
     public String handleFormSubmitDan(@RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String DriverLicenseNumber, Model model) {
         Usecase uc = new Usecase();
         String ok = uc.checkin(Firstname, Lastname, DriverLicenseNumber);
@@ -24,8 +24,16 @@ public class UIController {
         return "TidForCheckInDan";
     }
 
+    @RequestMapping(value = "/CheckInDan", method = {RequestMethod.GET, RequestMethod.POST})
+    public String handleFormSubmitTilbageTilCheckInDan( Model model) {
+        Usecase uc = new Usecase();
+        model.addAttribute("okValue");
+        return "CheckInDan";
+    }
 
-    */
+
+
+
     @PostMapping("/TimeForCheckInEng")
     public String handleFormSubmitEng(@RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String DriverLicenseNumber, Model model) {
         Usecase uc = new Usecase();
@@ -33,7 +41,7 @@ public class UIController {
         model.addAttribute("okValue", ok);
         return "TidForCheckInDan";
     }
-
+/*
     @PostMapping("/TidForCheckInDan")
     public String handleFormSubmitDan(
             @RequestParam String Firstname,
@@ -73,5 +81,7 @@ public class UIController {
         return "CheckInDan";
     }
 
+
+ */
 
 }

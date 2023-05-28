@@ -153,13 +153,17 @@
         <input type="text" name="DriverLicenseNumber" placeholder="Kørekorts Nummmer" required>
         <label for="shipping-company">Vælg dit fragtfirma:</label>
         <select id="shipping-company" name="shipping-company" required>
-          <option value="" selected disabled>Vælg dit fragtfirma</option>
+          <option required value="" selected disabled>Vælg dit fragtfirma</option>
           <option value="DHL">DHL</option>
           <option value="DSV">DSV</option>
           <option value="GLS">GLS</option>
           <option value="Andet">Andet</option>
 
         </select>
+        <input type="checkbox" id="myCheck">
+        <label for="myCheck">I do Accept <a href="https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_da.htm#shortcut-10" target="_blank"> the GDPR-rules</a></label>
+
+
         <center>
           <form action="upload.php" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">Vælg en fil:</label>
@@ -176,23 +180,5 @@
   </form>
 </div>
 
-
-<script>
-  function goToSignup() {
-    window.location.href = "SignUpdan.html";
-  }
-
-  function goToLogin() {
-    var Firstname = document.getElementsByName("Firstname")[0].value;
-    var Lastname = document.getElementsByName("Lastname")[0].value;
-    var shippingCompany = document.getElementsByName("shipping-company")[0].value;
-
-    if (Firstname !== "" && Lastname !== "" && shippingCompany !== "") {
-      window.location.href = "tidForCheckINdan.html";
-    } else {
-      alert("Udfyld alle nødvendige felter.");
-    }
-  }
-</script>
 </body>
 </html>
