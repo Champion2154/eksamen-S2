@@ -15,8 +15,8 @@ public class DBController {
 
 
     String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
-    String userName = "270jqa9clsmc5diso0av";
-    String passWord = "pscale_pw_BWF79D7Y6yMPxhSSlG3n1fbDUyvzyAU3h0djtx42bQ5";
+    String userName = "0mvngp4hmbmd9d4cohqr";
+    String passWord = "pscale_pw_PG7M2hTAX2EUNgPSpWoTg0YTtufaWzb7SzUO9t2ICzm";
 
 
     public void Sql() {
@@ -34,6 +34,22 @@ public class DBController {
     public String registerCheckIn(String firstName, String lastName, String DriverLicenseNumber) {
         return "aaasd";
     }
+
+
+
+    public void indsaetKvittering(Kvittering k) {
+        try {
+            String sql = "INSERT INTO kvittering (kvitID, dato, tidspunkt, kfnavn, kenavn, mnr) VALUES('" + k.getKvitID() + "','" + k.getDato() + "','" + k.getTidspunkt() + "','" + k.getKfnavn() + "','" + k.getKenavn() + "','" + k.getMnr() + "')";
+            Statement stmt = connection.createStatement();
+            stmt.execute(sql);
+            System.out.println("Connection to SQLite has been established.");
+            stmt.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
 
 
 }

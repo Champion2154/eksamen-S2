@@ -24,11 +24,26 @@ public class UIController {
         return "TidForCheckInDan";
     }
 
-    @RequestMapping(value = "/CheckInDan", method = {RequestMethod.GET, RequestMethod.POST})
+    /*@RequestMapping(value = "/CheckInDan", method = {RequestMethod.GET, RequestMethod.POST})
     public String handleFormSubmitTilbageTilCheckInDan( Model model) {
         Usecase uc = new Usecase();
         model.addAttribute("okValue");
         return "CheckInDan";
+    }
+
+     */
+    @PostMapping("/CheckInDan")
+    public String handleFormSubmitChangeLanguageToDan(Model model) {
+        // Process form submission for Danish check-in
+        model.addAttribute("okValue", "Check-in successful!");
+        return "CheckInDan";
+    }
+
+    @PostMapping("/CheckInEng")
+    public String handleFormSubmitChangeLanguageToEng(Model model) {
+        // Process form submission for English check-in
+        model.addAttribute("okValue", "Check-in successful!");
+        return "CheckInEng";
     }
 
 
