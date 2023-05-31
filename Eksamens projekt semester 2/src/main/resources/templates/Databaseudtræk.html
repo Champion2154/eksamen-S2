@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Databaseudtræk</title>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #04AA6D;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    #result-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #data-container {
+      width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-button,
+    .all-data-button {
+      display: inline-block;
+      margin: 10px;
+      color: #04AA6D;
+      text-decoration: none;
+      border: 2px solid #04AA6D;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    #data-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #data-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Databaseudtræk</h1>
+
+<form id="search-form">
+  <label for="speceltID">SpeceltID:</label>
+  <input type="text" id="speceltID" name="speceltID">
+  <input type="submit" value="Søg">
+</form>
+
+<div id="result-container">
+  <div id="data-container"></div>
+</div>
+
+<div class="button-container">
+  <a href="andet_html_side.html" class="back-button">Gå tilbage</a>
+  <input type="submit" value="Udfør udtræk på alle data" class="all-data-button" onclick="udtraekAlleData()">
+</div>
+
+<script>
+  // Funktion til at håndtere formularindsendelse via AJAX
+  document.getElementById("search-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Forhindrer standard formularindsendelse
+
+    var speceltID = document.getElementById("speceltID").value; // Henter SpeceltID fra inputfeltet
+
+    // Opret en XMLHttpRequest-forespørgsel
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // Opdater data-container med de returnerede data
+        document.getElementById("data-container").innerHTML = this.responseText;
+      }
+    };
+
+    // Udfør en GET-anmodning til databaseudtraek.php med speceltID som parameter
+    xhr.open("GET", "databaseudtraek.php?speceltID=" + encodeURIComponent(speceltID), true);
+    xhr.send();
+  });
+
+  // Funktion til at håndtere formularindsendelse for udtræk på alle data via AJAX
+  function udtraekAlleData() {
+    // Opret en XMLHttpRequest-forespørgsel
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (this.readyState === 4 && this.status === 200) {
+        // Opdater data-container med de returnerede data som en liste
+        var data = JSON.parse(this.responseText);
+        var dataList = document.createElement("ul");
+        dataList.setAttribute("id", "data-list");
+        data.forEach(function(item) {
+          var listItem = document.createElement("li");
+          listItem.textContent = item;
+          dataList.appendChild(listItem);
+        });
+        document.getElementById("data-container").innerHTML = "";
+        document.getElementById("data-container").appendChild(dataList);
+      }
+    };
+
+    // Udfør en GET-anmodning til databaseudtraek.php uden speceltID parameter for at udtrække alle data
+    xhr.open("GET", "databaseudtraek.php?all=true", true);
+    xhr.send();
+  }
+</script>
+</body>
+</html>
