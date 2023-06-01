@@ -1,43 +1,196 @@
 package com.example.asdfasd;
 
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBController {
 
-    public Connection databaseLink;
-    private Connection conn;
-    private Connection connection;
-    private Statement stmt;
-    private Statement stmt1;
 
+    private String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
+    private String userName = "k9jqltez5exelkpkd79b";
+    private String passWord = "pscale_pw_Yy4Jz7ByyUuyWWOTODauocgP3tNtsScPUDG9GAo0RTo";
 
-    String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
-    String userName = "0mvngp4hmbmd9d4cohqr";
-    String passWord = "pscale_pw_PG7M2hTAX2EUNgPSpWoTg0YTtufaWzb7SzUO9t2ICzm";
-
-
-    public void Sql() {
+    public DBController() {
         try {
-            Connection connection = DriverManager.getConnection(this.connectString, this.userName, this.passWord);
-
-            if (connection == null) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            throw new IllegalStateException("Cannot connect the database!", e);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    public String registerCheckIn(String firstName, String lastName, String DriverLicenseNumber) {
-        return "aaasd";
+    public Connection connect() {
+        try {
+            Connection connection = DriverManager.getConnection(connectString, userName, passWord);
+            return connection;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void close(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public User getUserById(int userId) {
+        User user = null;
+        Connection connection = null;
+        PreparedStatement pstmt = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = connect();
+            String sql = "SELECT * FROM User WHERE UserID = ?";
+            pstmt = connection.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+            resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+                user = new User();
+                user.setFirstname(resultSet.getString("Firstname"));
+                user.setLastname(resultSet.getString("Lastname"));
+                user.setDriverLicenseNumber(resultSet.getString("DriverLicenseNumber"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                close(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return user;
     }
 
 
+    public void InsertUser(User user) {
+        Connection connection = null;
+        PreparedStatement pstmt = null;
 
-    public void indsaetKvittering(Kvittering k) {
+        try {
+            connection = connect();
+            String sql = "INSERT INTO User (Firstname, Lastname, DriverLicenseNumber) VALUES (?, ?, ?)";
+            pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, user.getFirstname());
+            pstmt.setString(2, user.getLastname());
+            pstmt.setString(3, user.getDriverLicenseNumber());
+
+            pstmt.executeUpdate();
+
+            // Retrieve the auto-generated UserID
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            int userID = -1;
+            if (generatedKeys.next()) {
+                userID = generatedKeys.getInt(1);
+            }
+            generatedKeys.close();
+
+            if (userID != -1) {
+                String sql2 = "INSERT INTO UserCheckin (UserID, TimeForCheckIn, FirmID) VALUES (?, CURRENT_TIMESTAMP, ?)";
+                pstmt = connection.prepareStatement(sql2);
+                pstmt.setInt(1, userID);
+                pstmt.setString(2, user.getFirm());
+
+                pstmt.executeUpdate();
+            }
+
+            System.out.println("Data inserted successfully.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+                close(connection);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+  /*  @GetMapping("/displayUser")
+    @ResponseBody
+    public User displayUser(@RequestParam("UserID") int userId) {
+        String query = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
+        User user = null;
+        try (Connection connection = DriverManager.getConnection(connectString, userName, passWord);
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                user = new User();
+                user.setFirstname(resultSet.getString("Firstname"));
+                user.setLastname(resultSet.getString("Lastname"));
+                user.setDriverLicenseNumber(resultSet.getString("DriverLicenseNumber"));
+
+                System.out.println("User Data:");
+                System.out.println("First Name: " + user.getFirstname());
+                System.out.println("Last Name: " + user.getLastname());
+                System.out.println("Driver's License Number: " + user.getDriverLicenseNumber());
+            } else {
+                System.out.println("User not found.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+   */
+  @PostMapping("/User")
+  public User displayUser(@RequestParam("UserID") int UserID) {
+      // Perform database query and retrieval logic here
+      // Replace the code below with your actual database queries and retrieval logic
+      String query = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
+      User user = null;
+      try (Connection connection = DriverManager.getConnection(connectString, userName, passWord);
+           PreparedStatement statement = connection.prepareStatement(query)) {
+          statement.setInt(1, UserID);
+          ResultSet resultSet = statement.executeQuery();
+          if (resultSet.next()) {
+              user = new User();
+              user.setFirstname(resultSet.getString("Firstname"));
+              user.setLastname(resultSet.getString("Lastname"));
+              user.setDriverLicenseNumber(resultSet.getString("DriverLicenseNumber"));
+          }
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+      return user;
+  }
+
+
+
+}
+
+
+// Add other methods here if needed
+
+   /* public void indsaetKvittering(Kvittering k) {
         try {
             String sql = "INSERT INTO kvittering (kvitID, dato, tidspunkt, kfnavn, kenavn, mnr) VALUES('" + k.getKvitID() + "','" + k.getDato() + "','" + k.getTidspunkt() + "','" + k.getKfnavn() + "','" + k.getKenavn() + "','" + k.getMnr() + "')";
             Statement stmt = connection.createStatement();
@@ -49,10 +202,7 @@ public class DBController {
         }
     }
 
-
-
-
-}
+    */
 
 
 

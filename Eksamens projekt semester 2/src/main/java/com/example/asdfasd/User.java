@@ -1,35 +1,49 @@
 package com.example.asdfasd;
 
 public class User {
-    private String Name;
+    private String Firstname;
+    private String Lastname;
     private String IdPicture;
-    private String ShippingCompany;
+    private String Firm;
+    private String DriverLicenseNumber;
 
 
-    public User(String name, String idPicture, String shippingCompany) {
-        Name = name;
-        IdPicture = idPicture;
-        ShippingCompany = shippingCompany;
+    @Override
+    public String toString() {
+        return "User{" +
+                "Firstname='" + Firstname + '\'' +
+                ", Lastname='" + Lastname + '\'' +
+                ", IdPicture='" + IdPicture + '\'' +
+                ", Firm='" + Firm + '\'' +
+                ", DriverLicenseNumber='" + DriverLicenseNumber + '\'' +
+                '}';
+    }
+
+    public User(String firstname, String lastname, /*String idPicture, String firm,*/ String driverLicenseNumber) {
+        Firstname = firstname;
+        Lastname = lastname;
+        //IdPicture = idPicture;
+        //Firm = firm;
+        DriverLicenseNumber = driverLicenseNumber;
     }
 
     public User() {
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "Name='" + Name + '\'' +
-                ", IdPicture='" + IdPicture + '\'' +
-                ", ShippingCompany='" + ShippingCompany + '\'' +
-                '}';
+    public String getFirstname() {
+        return Firstname;
     }
 
-    public String getName() {
-        return Name;
+    public void setFirstname(String firstname) {
+        Firstname = firstname;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public String getLastname() {
+        return Lastname;
+    }
+
+    public void setLastname(String lastname) {
+        Lastname = lastname;
     }
 
     public String getIdPicture() {
@@ -40,11 +54,19 @@ public class User {
         IdPicture = idPicture;
     }
 
-    public String getShippingCompany() {
-        return ShippingCompany;
+    public String getFirm() {
+        return Firm;
     }
 
-    public void setShippingCompany(String shippingCompany) {
-        ShippingCompany = shippingCompany;
+    public void setFirm(String firm) {
+        Firm = firm;
+    }
+
+    public String getDriverLicenseNumber() {
+        return DriverLicenseNumber;
+    }
+
+    public void setDriverLicenseNumber(String driverLicenseNumber) {
+        DriverLicenseNumber = driverLicenseNumber;
     }
 }

@@ -10,7 +10,9 @@
   <title>intec.com</title>
 </head>
 <style>
+  /* Add your existing CSS styles here */
 
+  /* ... */
   label[for="shipping-company"] {
     display: block;
     margin-bottom: 10px;
@@ -135,18 +137,29 @@
    }
    */
 
-
 </style>
+<form method="post" action="/DatabasePrintOut">
+  <div class="row">
+    <div class="col">
+      <input type="submit" value="Database udprint" class="button">
+    </div>
+  </div>
+</form>
+
 <body>
 
-    <div class="container">
-      <div class="flags">
-        <form method="post" action="/CheckInDan">
-          <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1200px-Flag_of_Denmark.svg.png" alt="Danish flag" height="30" width="60"></button>
-        </form>
-        <form method="post" action="/CheckInEng">
-          <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png" alt="American flag" height="30" width="60"></button>
-        </form>
+<div class="container">
+  <div class="flags">
+    <!-- Add your existing flag buttons here -->
+
+    <!-- ... -->
+    <form method="post" action="/CheckInDan">
+      <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1200px-Flag_of_Denmark.svg.png" alt="Danish flag" height="30" width="60"></button>
+    </form>
+    <form method="post" action="/CheckInEng">
+      <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png" alt="American flag" height="30" width="60"></button>
+    </form>
+
   </div>
 
   <form method="post" action="/TidForCheckInDan">
@@ -156,18 +169,16 @@
         <input type="text" name="Firstname" placeholder="Fornavn" required>
         <input type="text" name="Lastname" placeholder="Efternavn" required>
         <input type="text" name="DriverLicenseNumber" placeholder="Kørekorts Nummmer" required>
-        <label for="shipping-company">Vælg dit fragtfirma:</label>
-        <select id="shipping-company" name="shipping-company" required>
+        <label for="Firm">Vælg dit fragtfirma:</label>
+        <select id="Firm" name="Firm" required>
           <option required value="" selected disabled>Vælg dit fragtfirma</option>
           <option value="DHL">DHL</option>
           <option value="DSV">DSV</option>
           <option value="GLS">GLS</option>
           <option value="Andet">Andet</option>
-
         </select>
         <input type="checkbox" id="myCheck">
         <label for="myCheck">I do Accept <a href="https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_da.htm#shortcut-10" target="_blank"> the GDPR-rules</a></label>
-
 
         <center>
           <form action="upload.php" method="post" enctype="multipart/form-data">
@@ -176,10 +187,12 @@
           </form>
         </center>
 
-        <!input type="submit" value=  "TjekInd" class="button" onclick="goToLogin()">
         <input type="submit" value="TjekInd" class="button">
-
         <input type="button" value="RegistereDigHer" class="button" onclick="goToSignup()">
+        <!-- Add your existing "RegistereDigHer" button here -->
+
+        <!-- ... -->
+
       </div>
     </div>
   </form>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DatabaseOutPrint</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #04AA6D;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    #result-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #data-container {
+      width: 400px;
+      margin: 0 auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 4px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .button {
+      display: inline-block;
+      margin: 10px;
+      color: #04AA6D;
+      text-decoration: none;
+      border: 2px solid #04AA6D;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    #data-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    #data-list li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<h1>Databaseudtræk</h1>
+
+<form id="search-form">
+  <label for="SpecificID">SpecificID:</label>
+  <input type="text" id="SpecificID" name="ID">
+  <form method="post" action="/User">
+  <input type="submit" value="Søg" class="button">
+  </form>
+</form>
+
+<div id="result-container">
+  <div id="data-container"></div>
+</div>
+
+<div class="button-container">
+  <form method="post" action="/CheckInDan">
+  <button id="back-button" class="button">Gå tilbage</button>
+  </form>
+</div>
+
+<script>
+  // Function to retrieve user data
+  function getUserData(userId) {
+    // Simulated database retrieval logic
+    // Replace this code with your actual database queries
+    console.log("Retrieving user data for ID: " + userId);
+
+    // Simulated user data (replace with your actual data retrieval logic)
+    var userData = {
+      Firstname: "John",
+      Lastname: "Doe",
+      DriverLicenseNumber: "1234567890"
+    };
+
+    return userData;
+  }
+
+  // Function to handle form submission via AJAX
+  document.getElementById("search-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    var specificID = document.getElementById("SpecificID").value; // Get SpecificID from input field
+
+    // Call function to retrieve user data
+    var userData = getUserData(specificID);
+
+    // Update data-container with the returned user data
+    var dataContainer = document.getElementById("data-container");
+    dataContainer.innerHTML = ""; // Clear previous content
+
+    if (userData) {
+      // Create HTML elements to display user data
+      var userDataHTML = "<strong>User Data:</strong><br>";
+      userDataHTML += "<strong>First Name:</strong> " + userData.Firstname + "<br>";
+      userDataHTML += "<strong>Last Name:</strong> " + userData.Lastname + "<br>";
+      userDataHTML += "<strong>Driver's License Number:</strong> " + userData.DriverLicenseNumber + "<br>";
+
+      dataContainer.innerHTML = userDataHTML;
+    } else {
+      // User not found
+      dataContainer.innerHTML = "User not found.";
+    }
+  });
+</script>
+</body>
+</html>
