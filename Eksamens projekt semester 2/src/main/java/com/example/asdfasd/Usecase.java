@@ -31,6 +31,13 @@ public class Usecase {
         return user;
     }
 
+    public Firms insertFirmID(String FirmID) {
+        Firms firms = new Firms();
+        firms.setFirmID(FirmID);
+        // Set any other necessary properties for the User object
+        return firms;
+    }
+
 
 
 }

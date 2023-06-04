@@ -16,8 +16,8 @@ public class DBController {
 
 
     private String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
-    private String userName = "k9jqltez5exelkpkd79b";
-    private String passWord = "pscale_pw_Yy4Jz7ByyUuyWWOTODauocgP3tNtsScPUDG9GAo0RTo";
+    private String userName = "oy8b1x0kacjx6ba7usjv";
+    private String passWord = "pscale_pw_4PyXkShDjc2rLnd48EvXGZIpiJRKft6Ky0xQfQ0MtO0";
 
     public DBController() {
         try {
@@ -81,15 +81,13 @@ public class DBController {
                 e.printStackTrace();
             }
         }
-
         return user;
     }
 
 
-    public void InsertUser(User user) {
+    public void InsertUser(User user, Firms firms) {
         Connection connection = null;
         PreparedStatement pstmt = null;
-
         try {
             connection = connect();
             String sql = "INSERT INTO User (Firstname, Lastname, DriverLicenseNumber) VALUES (?, ?, ?)";
@@ -97,9 +95,7 @@ public class DBController {
             pstmt.setString(1, user.getFirstname());
             pstmt.setString(2, user.getLastname());
             pstmt.setString(3, user.getDriverLicenseNumber());
-
             pstmt.executeUpdate();
-
             // Retrieve the auto-generated UserID
             ResultSet generatedKeys = pstmt.getGeneratedKeys();
             int userID = -1;
@@ -107,16 +103,13 @@ public class DBController {
                 userID = generatedKeys.getInt(1);
             }
             generatedKeys.close();
-
             if (userID != -1) {
                 String sql2 = "INSERT INTO UserCheckin (UserID, TimeForCheckIn, FirmID) VALUES (?, CURRENT_TIMESTAMP, ?)";
                 pstmt = connection.prepareStatement(sql2);
                 pstmt.setInt(1, userID);
-                pstmt.setString(2, user.getFirm());
-
+                pstmt.setString(2, firms.getFirmID());
                 pstmt.executeUpdate();
             }
-
             System.out.println("Data inserted successfully.");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,6 +124,7 @@ public class DBController {
             }
         }
     }
+
   /*  @GetMapping("/displayUser")
     @ResponseBody
     public User displayUser(@RequestParam("UserID") int userId) {
@@ -165,10 +159,10 @@ public class DBController {
   public User displayUser(@RequestParam("UserID") int UserID) {
       // Perform database query and retrieval logic here
       // Replace the code below with your actual database queries and retrieval logic
-      String query = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
+      String sql = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
       User user = null;
       try (Connection connection = DriverManager.getConnection(connectString, userName, passWord);
-           PreparedStatement statement = connection.prepareStatement(query)) {
+           PreparedStatement statement = connection.prepareStatement(sql)) {
           statement.setInt(1, UserID);
           ResultSet resultSet = statement.executeQuery();
           if (resultSet.next()) {
@@ -182,7 +176,6 @@ public class DBController {
       }
       return user;
   }
-
 
 
 }

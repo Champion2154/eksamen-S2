@@ -19,11 +19,11 @@ public class User {
                 '}';
     }
 
-    public User(String firstname, String lastname, /*String idPicture, String firm,*/ String driverLicenseNumber) {
+    public User(String firstname, String lastname, /*String idPicture, */ String firm, String driverLicenseNumber) {
         Firstname = firstname;
         Lastname = lastname;
         //IdPicture = idPicture;
-        //Firm = firm;
+        Firm = firm;
         DriverLicenseNumber = driverLicenseNumber;
     }
 

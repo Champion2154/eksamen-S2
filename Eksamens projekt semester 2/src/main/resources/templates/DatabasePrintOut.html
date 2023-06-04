@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>DatabaseOutPrint</title>
   <style>
@@ -80,16 +80,17 @@
 <body>
 <h1>Databaseudtræk</h1>
 
-<form id="search-form">
-  <label for="SpecificID">SpecificID:</label>
-  <input type="text" id="SpecificID" name="ID">
-  <form method="post" action="/User">
-  <input type="submit" value="Søg" class="button">
+  <!form method="post" action="/User">
+  <form id="search-form" method="post" action="/Databaseget">
+    <label for="SpecificID">SpecificID:</label>
+    <input type="text" id="SpecificID" name="ID">
+    <input type="submit" value="Søg" class="button">
   </form>
-</form>
 
 <div id="result-container">
-  <div id="data-container"></div>
+<td th:text="${user.Firstname}"></td>
+<td th:text="${user.Lastname}"></td>
+<td th:text="${user.DriverLicenseNumber}"></td>
 </div>
 
 <div class="button-container">
@@ -100,10 +101,10 @@
 
 <script>
   // Function to retrieve user data
-  function getUserData(userId) {
+  /* function getUserData(UserID) {
     // Simulated database retrieval logic
     // Replace this code with your actual database queries
-    console.log("Retrieving user data for ID: " + userId);
+    console.log("Retrieving user data for ID: " + UserID);
 
     // Simulated user data (replace with your actual data retrieval logic)
     var userData = {
@@ -120,10 +121,8 @@
     event.preventDefault(); // Prevent default form submission
 
     var specificID = document.getElementById("SpecificID").value; // Get SpecificID from input field
-
     // Call function to retrieve user data
     var userData = getUserData(specificID);
-
     // Update data-container with the returned user data
     var dataContainer = document.getElementById("data-container");
     dataContainer.innerHTML = ""; // Clear previous content
@@ -141,6 +140,8 @@
       dataContainer.innerHTML = "User not found.";
     }
   });
+
+   */
 </script>
 </body>
 </html>
