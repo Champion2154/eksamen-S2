@@ -10,9 +10,7 @@
   <title>intec.com</title>
 </head>
 <style>
-  /* Add your existing CSS styles here */
 
-  /* ... */
   label[for="shipping-company"] {
     display: block;
     margin-bottom: 10px;
@@ -150,16 +148,12 @@
 
 <div class="container">
   <div class="flags">
-    <!-- Add your existing flag buttons here -->
-
-    <!-- ... -->
     <form method="post" action="/CheckInDan">
       <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1200px-Flag_of_Denmark.svg.png" alt="Danish flag" height="30" width="60"></button>
     </form>
     <form method="post" action="/CheckInEng">
       <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png" alt="American flag" height="30" width="60"></button>
     </form>
-
   </div>
 
   <form method="post" action="/TidForCheckInDan">
@@ -172,23 +166,23 @@
         <label for="Firm">Vælg dit fragtfirma:</label>
         <select id="Firm" name="FirmID" required>
           <option required value="" selected disabled>Vælg dit fragtfirma</option>
-          <option name="FirmId" id="1" value="1">GLS</option>
-          <option name="FirmId" id="2" value="2">Andet</option>
-          <option name="FirmId" id="3" value="3">DHL</option>
-          <option name="FirmId" id="4" value="4">DSV</option>
+          <option name="FirmID" id="1" value="1">GLS</option>
+          <option name="FirmID" id="2" value="2">Andet</option>
+          <option name="FirmID" id="3" value="3">DHL</option>
+          <option name="FirmID" id="4" value="4">DSV</option>
         </select>
-        <input type="checkbox" id="myCheck">
+        <input type="checkbox" id="myCheck" required>
         <label for="myCheck">I do Accept <a href="https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_da.htm#shortcut-10" target="_blank"> the GDPR-rules</a></label>
 
         <center>
-          <form action="upload.php" method="post" enctype="multipart/form-data">
+          <!--form action="upload.php" method="post" enctype="multipart/form-data">
             <label for="fileToUpload">Vælg en fil:</label>
             <input type="file" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('fileLabel').innerHTML = this.files[0].name">
-          </form>
+          </form-->
         </center>
 
         <input type="submit" value="TjekInd" class="button">
-        <input type="button" value="RegistereDigHer" class="button" onclick="goToSignup()">
+        <!--input type="button" value="RegistereDigHer" class="button" onclick="goToSignup()"-->
         <!-- Add your existing "RegistereDigHer" button here -->
 
         <!-- ... -->

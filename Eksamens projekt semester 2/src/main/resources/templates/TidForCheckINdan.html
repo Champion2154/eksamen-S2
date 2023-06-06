@@ -18,10 +18,11 @@
   <form method="post" action="/CheckInDan">
     <div class="row">
       <div class="col">
-                <input type="submit" value="Tilbage til Tjek ind" class="button">
+        <input type="submit" value="Tilbage til Tjek ind" class="button">
       </div>
       </div>
   </form>
+
   <script>
     window.onload = function() {
       var currentTime = new Date();
@@ -29,7 +30,7 @@
       var minutes = currentTime.getMinutes();
       var seconds = currentTime.getSeconds();
       var clockMessage = "Current time: " + hours + ":" + minutes + ":" + seconds;
-      var greetingMessage = "Tak for at logge ind hos Intec";
+      var greetingMessage = "Tak for at tjekke ind hos Intec";
       document.getElementById("clock-message").textContent = clockMessage;
       document.getElementById("greeting-message").textContent = greetingMessage;
       /*setTimeout(function() {

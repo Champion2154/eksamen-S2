@@ -15,7 +15,7 @@
             return "CheckInDan";
         }
 
-        // Mapping for the registration form submission
+        // Mapping for TidForCheckInDan
         @PostMapping("/TidForCheckInDan")
         public String handleFormSubmitDan(@RequestParam String Firstname, @RequestParam String Lastname, @RequestParam String DriverLicenseNumber, @RequestParam String FirmID, Model model) {
             Usecase uc = new Usecase();
@@ -50,23 +50,12 @@
             return "TimeForCheckInEng";
         }
 
-        /*@GetMapping("/displayUser")
-      public String displayUser(@RequestParam int userId, Model model) {
-          DBController db = new DBController();
-          User user = db.getUserById(userId);
-          model.addAttribute("user", user);
-
-          return "userDetailsPage"; // Return the name of the view to display the user details
-      }
-
-       */
         @GetMapping("/DatabasePrintOut")
         public String handleFormSubmitDatabasePrintOut(Model model) {
             User user = new User();
             user.setFirstname("");
             user.setLastname("");
             model.addAttribute("user", user);
-
             return "DatabasePrintOut"; // Site DatabasePrintOut is shown.
         }
 
@@ -89,8 +78,6 @@
         public String searchUserGet() {
             return "DatabasePrintOut";
         }
-
-
 
 
     }
@@ -148,3 +135,13 @@
 
 
      */
+ /*@GetMapping("/displayUser")
+      public String displayUser(@RequestParam int userId, Model model) {
+          DBController db = new DBController();
+          User user = db.getUserById(userId);
+          model.addAttribute("user", user);
+
+          return "userDetailsPage"; // Return the name of the view to display the user details
+      }
+
+       */

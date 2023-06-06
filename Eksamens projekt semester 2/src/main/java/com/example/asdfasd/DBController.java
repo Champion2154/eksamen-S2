@@ -15,17 +15,17 @@ import java.sql.Statement;
 public class DBController {
 
 
-    private String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
-    private String userName = "oy8b1x0kacjx6ba7usjv";
-    private String passWord = "pscale_pw_4PyXkShDjc2rLnd48EvXGZIpiJRKft6Ky0xQfQ0MtO0";
 
-    public DBController() {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+
+
+    private final String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
+    private final String userName = "o9qv1zc2dmo17fb1ris6";
+    private final String passWord = "pscale_pw_AGqNzeNrfqqq3HZjylbjhV93GNAXACdlhOPec6YXydX";
+
+
+
+
+
 
     public Connection connect() {
         try {
@@ -44,6 +44,14 @@ public class DBController {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public DBController() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 

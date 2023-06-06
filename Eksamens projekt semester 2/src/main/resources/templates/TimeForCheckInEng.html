@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>intec.com/</title>
@@ -14,6 +14,15 @@
       font-size: 3em;
     }
   </style>
+
+  <form method="post" action="/CheckInEng">
+    <div class="row">
+      <div class="col">
+        <input type="submit" value="Back to Check in" class="button">
+      </div>
+    </div>
+  </form>
+
   <script>
     window.onload = function() {
       var currentTime = new Date();
@@ -21,12 +30,13 @@
       var minutes = currentTime.getMinutes();
       var seconds = currentTime.getSeconds();
       var clockMessage = "Current time: " + hours + ":" + minutes + ":" + seconds;
-      var greetingMessage = "Thank you for logging in at Intec";
+      var greetingMessage = "Thank you for Checking in at Intec";
       document.getElementById("clock-message").textContent = clockMessage;
       document.getElementById("greeting-message").textContent = greetingMessage;
-      setTimeout(function() {
+     /* setTimeout(function() {
         window.location.href = "CheckINeng.html";
       }, 15000); // 15 seconds in milliseconds
+      */
     };
   </script>
 </head>
