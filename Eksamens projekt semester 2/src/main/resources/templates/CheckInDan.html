@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="static/intec.css">
+  <link rel="icon" type="image/x-icon" href="C:\Users\benja\Desktop\logo_stor-e1603991240532.jpg">
+  <title>intec.com</title>
+</head>
+<style>
+
+  label[for="shipping-company"] {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+
+  select#shipping-company {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: 1px solid #999;
+    background: #f1f1f1;
+    border-radius: 5px;
+    font-size: 16px;
+    color: #555;
+  }
+
+
+  /* Style for the container */
+  .container {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 150px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  /* Style for the form */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Style for the headings */
+  h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  /* Style for the input fields */
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Style for the submit button */
+  input[type=submit],
+  input[type=signup] {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  /* Style for the bottom container */
+  .bottom-container {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+  }
+
+  /* Style for the bottom container links */
+  .bottom-container a {
+    color: #666;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+
+  /* Style for the bottom container links on hover */
+  .bottom-container a:hover {
+    color: #555;
+    text-decoration: underline;
+  }
+
+  /* Style for the select shipping company */
+  .bottom-container select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+  }
+  /* Style for the login and signup buttons */
+  .button {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  /* .flag img {
+     max-height: 50px;
+     margin-right: 10px;
+   }
+   */
+
+</style>
+<form method="get" action="/DatabasePrintOut">
+  <div class="row">
+    <div class="col">
+      <input type="submit" value="Database udprint" class="button">
+    </div>
+  </div>
+</form>
+
+<body>
+
+<div class="container">
+  <div class="flags">
+    <form method="post" action="/CheckInDan">
+      <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Flag_of_Denmark.svg/1200px-Flag_of_Denmark.svg.png" alt="Danish flag" height="30" width="60"></button>
+    </form>
+    <form method="post" action="/CheckInEng">
+      <button type="submit"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/800px-Flag_of_the_United_States.svg.png" alt="American flag" height="30" width="60"></button>
+    </form>
+  </div>
+
+  <form method="post" action="/TidForCheckInDan">
+    <div class="row">
+      <h2 style="text-align:center">Intec Tjek ind</h2>
+      <div class="col">
+        <input type="text" name="Firstname" placeholder="Fornavn" required>
+        <input type="text" name="Lastname" placeholder="Efternavn" required>
+        <input type="text" name="DriverLicenseNumber" placeholder="Kørekorts Nummmer" required>
+        <label for="Firm">Vælg dit fragtfirma:</label>
+        <select id="Firm" name="FirmID" required>
+          <option required value="" selected disabled>Vælg dit fragtfirma</option>
+          <option name="FirmID" id="1" value="1">GLS</option>
+          <option name="FirmID" id="2" value="2">Andet</option>
+          <option name="FirmID" id="3" value="3">DHL</option>
+          <option name="FirmID" id="4" value="4">DSV</option>
+        </select>
+        <input type="checkbox" id="myCheck" required>
+        <label for="myCheck">I do Accept <a href="https://europa.eu/youreurope/business/dealing-with-customers/data-protection/data-protection-gdpr/index_da.htm#shortcut-10" target="_blank"> the GDPR-rules</a></label>
+
+        <center>
+          <!--form action="upload.php" method="post" enctype="multipart/form-data">
+            <label for="fileToUpload">Vælg en fil:</label>
+            <input type="file" name="fileToUpload" id="fileToUpload" onchange="document.getElementById('fileLabel').innerHTML = this.files[0].name">
+          </form-->
+        </center>
+
+        <input type="submit" value="TjekInd" class="button">
+        <!--input type="button" value="RegistereDigHer" class="button" onclick="goToSignup()"-->
+        <!-- Add your existing "RegistereDigHer" button here -->
+
+        <!-- ... -->
+
+      </div>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>

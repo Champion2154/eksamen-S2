@@ -1,0 +1,82 @@
+/* Style for the container */
+.container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the form */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style for the headings */
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+/* Style for the input fields */
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the submit button */
+input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    margin-top: 10px;
+}
+
+/* Style for the bottom container */
+.bottom-container {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+}
+
+/* Style for the bottom container links */
+.bottom-container a {
+    color: #666;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the bottom container links on hover */
+.bottom-container a:hover {
+    color: #555;
+    text-decoration: underline;
+}
+/* Style for the select element */
+select#shipping-company {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 5px 0 20px 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+}

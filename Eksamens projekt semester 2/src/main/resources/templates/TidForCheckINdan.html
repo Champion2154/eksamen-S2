@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>intec.com/</title>
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      text-align: center;
+    }
+    h1 {
+      margin-top: 150px;
+      font-size: 3em;
+    }
+  </style>
+
+  <form method="post" action="/CheckInDan">
+    <div class="row">
+      <div class="col">
+        <input type="submit" value="Tilbage til Tjek ind" class="button">
+      </div>
+      </div>
+  </form>
+
+  <script>
+    window.onload = function() {
+      var currentTime = new Date();
+      var hours = currentTime.getHours();
+      var minutes = currentTime.getMinutes();
+      var seconds = currentTime.getSeconds();
+      var clockMessage = "Current time: " + hours + ":" + minutes + ":" + seconds;
+      var greetingMessage = "Tak for at tjekke ind hos Intec";
+      document.getElementById("clock-message").textContent = clockMessage;
+      document.getElementById("greeting-message").textContent = greetingMessage;
+      /*setTimeout(function() {
+        window.location.href = "CheckINdan.html";
+      }, 15000); // 15 seconds in milliseconds
+
+       */
+    };
+  </script>
+</head>
+<body>
+<h1 id="greeting-message"></h1>
+<h2 id="clock-message"></h2>
+</body>
+</html>
