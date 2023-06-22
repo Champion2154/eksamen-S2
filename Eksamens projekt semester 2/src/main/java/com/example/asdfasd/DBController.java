@@ -19,8 +19,8 @@ public class DBController {
 
 
     private final String connectString = "jdbc:mysql://aws.connect.psdb.cloud/eksamen-semester2?sslMode=VERIFY_IDENTITY";
-    private final String userName = "o9qv1zc2dmo17fb1ris6";
-    private final String passWord = "pscale_pw_AGqNzeNrfqqq3HZjylbjhV93GNAXACdlhOPec6YXydX";
+    private final String userName = "dis7giynq1h9d0b39w61";
+    private final String passWord = "pscale_pw_vh0Mu4P9GoY0A86uvhQnMM0MDqVN5J8qNLy9R3TXMP5";
 
 
 
@@ -28,55 +28,66 @@ public class DBController {
 
 
     public Connection connect() {
+        //Establish a database connection
         try {
-            Connection connection = DriverManager.getConnection(connectString, userName, passWord);
-            return connection;
+            Connection connection = DriverManager.getConnection(connectString, userName, passWord);//use DriverManager to establish a connection using the provided connectString, userName, and passWord
+            return connection;//Return the established connection
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();//Print the stack trace if an SQLException occurs during the connection establishment
         }
-        return null;
+        return null;//Return null if the connection could not be established
     }
 
     public void close(Connection connection) {
+        //Close the database connection
         if (connection != null) {
             try {
-                connection.close();
+                connection.close();//Close the provided connection if it is not null
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace();//Print the stack trace if an SQLException occurs during the connection closing
             }
         }
     }
 
     public DBController() {
+        //Constructor for DBController
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");//Load the JDBC driver class for MySQL
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            e.printStackTrace();//print the stack trace if the driver class is not found
         }
     }
 
+
     public User getUserById(int userId) {
-        User user = null;
-        Connection connection = null;
-        PreparedStatement pstmt = null;
-        ResultSet resultSet = null;
+        //Declare and initialize variables
+        User user = null;//Store the retrieved user object
+        Connection connection = null;//Database connection object
+        PreparedStatement pstmt = null;//Prepared statement object
+        ResultSet resultSet = null;//Result set object
 
         try {
-            connection = connect();
-            String sql = "SELECT * FROM User WHERE UserID = ?";
-            pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, userId);
-            resultSet = pstmt.executeQuery();
+            //Establish a database connection
+            connection = connect();//Call the connect() method to get a database connection
 
+            //Prepare and execute the SQL query
+            String sql = "SELECT * FROM User WHERE UserID = ?";//SQL query to select user by UserID
+            pstmt = connection.prepareStatement(sql);//Create a prepared statement with the SQL query
+            pstmt.setInt(1, userId);//Set the UserID as a parameter in the prepared statement
+            resultSet = pstmt.executeQuery();//Execute the query and get the result set
+
+            //Check if a user is found in the result set
             if (resultSet.next()) {
+                //Create a new User object and set its attributes
                 user = new User();
                 user.setFirstname(resultSet.getString("Firstname"));
                 user.setLastname(resultSet.getString("Lastname"));
                 user.setDriverLicenseNumber(resultSet.getString("DriverLicenseNumber"));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();//Print the stack trace if a SQLException occurs
         } finally {
+            //Close the resources in the finally-block
             try {
                 if (resultSet != null) {
                     resultSet.close();
@@ -84,56 +95,95 @@ public class DBController {
                 if (pstmt != null) {
                     pstmt.close();
                 }
-                close(connection);
+                close(connection);//Close the database connection
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-        return user;
+        return user;//Return the retrieved user object
     }
 
 
     public void InsertUser(User user, Firms firms) {
         Connection connection = null;
         PreparedStatement pstmt = null;
+
         try {
-            connection = connect();
+            connection = connect();//Establish a database connection
             String sql = "INSERT INTO User (Firstname, Lastname, DriverLicenseNumber) VALUES (?, ?, ?)";
-            pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            pstmt.setString(1, user.getFirstname());
-            pstmt.setString(2, user.getLastname());
-            pstmt.setString(3, user.getDriverLicenseNumber());
-            pstmt.executeUpdate();
-            // Retrieve the auto-generated UserID
-            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            pstmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);//Prepare the SQL statement for inserting a new user into the User table, with auto-generated keys
+            pstmt.setString(1, user.getFirstname());//Set the first parameter (Firstname) of the prepared statement as the user's first name
+            pstmt.setString(2, user.getLastname());//Set the second parameter (Lastname) of the prepared statement as the user's last name
+            pstmt.setString(3, user.getDriverLicenseNumber());//Set the third parameter (DriverLicenseNumber) of the prepared statement as the user's driver license number
+            pstmt.executeUpdate();//Execute the SQL statement to insert the user into the User table
+
+            //Retrieve the auto-generated UserID
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();//Retrieve the auto-generated keys after the user insertion
             int userID = -1;
             if (generatedKeys.next()) {
-                userID = generatedKeys.getInt(1);
+                userID = generatedKeys.getInt(1);//Get the auto-generated UserID
             }
             generatedKeys.close();
+
             if (userID != -1) {
                 String sql2 = "INSERT INTO UserCheckin (UserID, TimeForCheckIn, FirmID) VALUES (?, CURRENT_TIMESTAMP, ?)";
-                pstmt = connection.prepareStatement(sql2);
-                pstmt.setInt(1, userID);
-                pstmt.setString(2, firms.getFirmID());
-                pstmt.executeUpdate();
+                pstmt = connection.prepareStatement(sql2);//Prepare the SQL statement for inserting a new user check-in record into the UserCheckin table
+                pstmt.setInt(1, userID);//Set the first parameter (UserID) of the prepared statement as the retrieved UserID
+                pstmt.setString(2, firms.getFirmID());//Set the second parameter (FirmID) of the prepared statement as the firm's ID
+                pstmt.executeUpdate();//Execute the SQL statement to insert the user check-in record into the UserCheckin table
             }
-            System.out.println("Data inserted successfully.");
+
+            System.out.println("Data inserted successfully.");//Print a success message
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace();//Print the stack trace if an SQLException occurs during the database operations
+
         } finally {
             try {
                 if (pstmt != null) {
-                    pstmt.close();
+                    pstmt.close();//Close the prepared statement
                 }
-                close(connection);
+                close(connection);//Close the database connection
+
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace();//Print the stack trace if an SQLException occurs during the resource closing
             }
         }
     }
 
-  /*  @GetMapping("/displayUser")
+
+    @PostMapping("/User")
+  public User displayUser(@RequestParam("UserID") int UserID) {
+      //Prepare and execute the SQL query
+      String sql = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
+      User user = null;//Store the retrieved user object
+      //Establish a database connection, by calling the connect() method.
+      try (Connection connection = DriverManager.getConnection(connectString, userName, passWord);
+          //Create a prepared statement with the SQL query
+          PreparedStatement statement = connection.prepareStatement(sql)) {
+          //Set the UserID as a parameter.
+          statement.setInt(1, UserID);
+          //Execute the query and get the result set
+          ResultSet resultSet = statement.executeQuery();
+          //Check if a user is found in the result set
+          if (resultSet.next()) {
+              user = new User();
+              user.setFirstname(resultSet.getString("Firstname"));
+              user.setLastname(resultSet.getString("Lastname"));
+              user.setDriverLicenseNumber(resultSet.getString("DriverLicenseNumber"));
+          }
+          //Print the stack trace if a SQLException occurs
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+      //Display the retrieved user object
+      return user;
+  }
+
+
+}
+
+ /*  @GetMapping("/displayUser")
     @ResponseBody
     public User displayUser(@RequestParam("UserID") int userId) {
         String query = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
@@ -163,31 +213,6 @@ public class DBController {
     }
 
    */
-  @PostMapping("/User")
-  public User displayUser(@RequestParam("UserID") int UserID) {
-      // Perform database query and retrieval logic here
-      // Replace the code below with your actual database queries and retrieval logic
-      String sql = "SELECT Firstname, Lastname, DriverLicenseNumber FROM user WHERE UserID = ?";
-      User user = null;
-      try (Connection connection = DriverManager.getConnection(connectString, userName, passWord);
-           PreparedStatement statement = connection.prepareStatement(sql)) {
-          statement.setInt(1, UserID);
-          ResultSet resultSet = statement.executeQuery();
-          if (resultSet.next()) {
-              user = new User();
-              user.setFirstname(resultSet.getString("Firstname"));
-              user.setLastname(resultSet.getString("Lastname"));
-              user.setDriverLicenseNumber(resultSet.getString("DriverLicenseNumber"));
-          }
-      } catch (SQLException e) {
-          e.printStackTrace();
-      }
-      return user;
-  }
-
-
-}
-
 
 // Add other methods here if needed
 
@@ -204,24 +229,6 @@ public class DBController {
     }
 
     */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
     public boolean validate(String UUsername, String PPassword) {
@@ -241,7 +248,6 @@ public class DBController {
         }
         return status;
     }
-
 }
 
   /*  public void indsaetKvittering(Kvittering k) {
@@ -255,7 +261,6 @@ public class DBController {
             throwables.printStackTrace();
         }
     }
-
 
 public Kvittering alleoplysninger() {
     String sql = "select * from kvittering";
